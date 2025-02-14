@@ -1,4 +1,3 @@
-'''
 import speech_recognition as sr
 
 def recognize_speech():
@@ -20,5 +19,5 @@ def recognize_speech():
 
 if __name__ == "__main__":
     recognize_speech()
-'''
+
 
