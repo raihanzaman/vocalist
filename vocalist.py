@@ -50,7 +50,7 @@ def recognize_speech():
         print("Recognizing...")
         text = recognizer.recognize_google(audio)
         print("You said: " + text)
-        speech_to_gemini(text)
+        return text
     except sr.UnknownValueError:
         print("Could not understand the audio")
     except sr.RequestError:
@@ -102,15 +102,46 @@ def load_results(filename="results.json"):
             return json.load(file)
     return {}  # Return an empty dictionary if file does not exist
 
-if __name__ == "__main__":
-  loaded_results = load_results()
-  if not isinstance(loaded_results, list):
-    loaded_results = []
-  text = input("Yap away: ")
-  gemini_response = text_to_gemini(text)
-  task_list = gemini_to_list(gemini_response)
-  # Add new tasks on top of the existing results
-  loaded_results = task_list + loaded_results
-  print(loaded_results)
-  save_results(loaded_results)
+def main():
+    task_list = load_results()
+    if not isinstance(task_list, list):
+        task_list = []
+    while True:
+        print("\nSelect an option:")
+        print("1. Speech Input")
+        print("2. Type Input")
+        print("3. Clear All Tasks")
+        print("4. Exit")
 
+        choice = input("Enter your choice (1-4): ").strip()
+
+        if choice == "1":
+            print("You selected Speech Input")
+            text = recognize_speech()
+            gemini_response = speech_to_gemini(text)
+            tasks = gemini_to_list(gemini_response)
+            task_list = tasks + task_list
+            print(task_list)
+            save_results(task_list)
+        elif choice == "2":
+            print("You selected Type Input")
+            text = input("Yap away: ")
+            gemini_response = text_to_gemini(text)
+            tasks = gemini_to_list(gemini_response)
+            task_list = tasks + task_list
+            print(task_list)
+            save_results(task_list)
+        elif choice == "3":
+            task_list = []
+            print(task_list)
+            save_results(task_list)
+            print("All tasks cleared!")
+            # Implement task clearing logic here
+        elif choice == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please enter a number between 1 and 4.")
+
+if __name__ == "__main__":
+  main()
