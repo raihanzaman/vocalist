@@ -18,7 +18,7 @@ generation_config = {
 
 current_date = datetime.date.today().strftime("%Y-%m-%d") # Get today's date in the format "YYYY-MM-DD"
 
-sys_instruction = '''The user will be prompted to speak after the system says "Listening...". 
+todo_instruction = '''The user will be prompted to speak after the system says "Listening...". 
 The system will then take the user's input and convert it to text. The text will then be sent 
 to you. We are a to-do list application, and your job is to take the user's input and convert 
 it into a bulleted list. We will be adding these as tasks to a to-do list, so try to analyze the
@@ -31,7 +31,7 @@ If no tasks provided, return nothing at all. Only print dates that are after the
 model = genai.GenerativeModel(
   model_name="gemini-2.0-flash",
   generation_config=generation_config,
-  system_instruction=sys_instruction
+  system_instruction=todo_instruction
 )
 
 chat_session = model.start_chat(
