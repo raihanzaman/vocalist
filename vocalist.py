@@ -112,9 +112,7 @@ def main():
         print("2. Type Input")
         print("3. Clear All Tasks")
         print("4. Exit")
-
         choice = input("Enter your choice (1-4): ").strip()
-
         if choice == "1":
             print("You selected Speech Input")
             text = recognize_speech()
@@ -136,7 +134,6 @@ def main():
             print(task_list)
             save_results(task_list)
             print("All tasks cleared!")
-            # Implement task clearing logic here
         elif choice == "4":
             print("Exiting...")
             break
