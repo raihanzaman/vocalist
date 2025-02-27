@@ -111,7 +111,8 @@ def main():
         print("1. Speech Input")
         print("2. Type Input")
         print("3. Clear All Tasks")
-        print("4. Exit")
+        print("4. Delete Specific Task")
+        print("5. Exit")
         choice = input("Enter your choice (1-4): ").strip()
         if choice == "1":
             print("You selected Speech Input")
@@ -135,6 +136,19 @@ def main():
             save_results(task_list)
             print("All tasks cleared!")
         elif choice == "4":
+          print(task_list)
+          index = input("Enter the index of the task you want to delete: ")
+          try:
+            index = int(index)
+            if 0 <= index < len(task_list):
+              del task_list[index]
+              print(task_list)
+              save_results(task_list)
+            else:
+              print("Invalid index. Please enter a number between 0 and", len(task_list) - 1)
+          except ValueError:
+            print("Invalid index. Please enter a number between 0 and", len(task_list) - 1)
+        elif choice == "5":
             print("Exiting...")
             break
         else:
