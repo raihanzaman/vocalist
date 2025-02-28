@@ -113,7 +113,7 @@ def main():
         print("3. Clear All Tasks")
         print("4. Delete Specific Task")
         print("5. Exit")
-        choice = input("Enter your choice (1-4): ").strip()
+        choice = input("Enter your choice (1-5): ").strip()
         if choice == "1":
             print("You selected Speech Input")
             text = recognize_speech()
