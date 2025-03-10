@@ -28,6 +28,36 @@ a colon. For the date, use the format "MM/DD/YYYY" and for the time, use the for
 Try to use today's date if the user does not provide one. Today's date is ''' + current_date + '''.''' + '''
 If no tasks provided, return nothing at all. Only print dates that are after the current date.'''
 
+
+
+habit_instructions = '''The user will be prompted to speak after the system says "Listening...". 
+The system will then take the user's input and convert it to text. The text will then be sent to you. 
+
+We are a habit-tracking application, and your job is to analyze the user's input and extract recurring habits. 
+Convert the input into a bulleted list of habits, including any specified frequency (e.g., daily, weekly, every Monday) 
+and time of day (if provided). 
+
+- If the user specifies a time, include it on the same line as the habit, separated by a colon, using the format "HH:MM AM/PM".  
+- If the user specifies a day or frequency, include that as well (e.g., "every Monday" or "twice a week").  
+- If no frequency is provided, assume the habit is daily.  
+
+Use today's date as a reference: ''' + current_date + '''. If the user provides a date, only include future dates. 
+If no valid habits are provided, return nothing at all. 
+
+Examples:  
+User says: "I want to meditate every morning at 7 AM and exercise three times a week."  
+Output:  
+- Meditate: 07:00 AM (Daily)  
+- Exercise (3x per week)  
+
+User says: "Read before bed at 10 PM and drink water every morning."  
+Output:  
+- Read before bed: 10:00 PM (Daily)  
+- Drink water (Every morning)  
+
+Do not respond with anything other than the formatted habit list.'''
+
+
 model = genai.GenerativeModel(
   model_name="gemini-2.0-flash",
   generation_config=generation_config,
